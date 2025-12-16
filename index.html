@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Firefighting AR - Video</title>
+  <title>Firefighting AR Video</title>
 
   <meta name="viewport"
         content="width=device-width,
@@ -29,13 +29,15 @@
 
   <!-- VIDEO ASSET -->
   <a-assets>
-    <video id="firesafetyVideo"
-           src="fire_safety.mp4"
-           preload="auto"
-           loop
-           crossorigin="anonymous"
-           playsinline
-           webkit-playsinline>
+    <video
+      id="firesafetyVideo"
+      src="fire_extinguisher_training.mp4"
+      preload="auto"
+      loop
+      muted
+      playsinline
+      webkit-playsinline
+      crossorigin="anonymous">
     </video>
   </a-assets>
 
@@ -45,25 +47,22 @@
     device-orientation-permission-ui="enabled: false"
     embedded>
 
-    <!-- Camera -->
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-    <!-- TARGET -->
-    <a-entity mindar-image-target="targetIndex: 0">
+    <!-- IMAGE TARGET -->
+    <a-entity mindar-image-target="targetIndex: 0"
+              id="target">
 
       <!-- VIDEO PLANE -->
       <a-video
         src="#firesafetyVideo"
         position="0 0.6 0"
         width="1.2"
-        height="0.7"
-        autoplay
-        loop>
+        height="0.7">
       </a-video>
 
-      <!-- OPTIONAL TEXT -->
       <a-text
-        value="Fire Safety Training Video"
+        value="Fire Extinguisher Training (PASS Method)"
         position="0 1.1 0"
         align="center"
         color="yellow"
@@ -73,6 +72,20 @@
     </a-entity>
 
   </a-scene>
+
+  <!-- PLAY / PAUSE CONTROL -->
+  <script>
+    const video = document.querySelector("#firesafetyVideo");
+    const target = document.querySelector("#target");
+
+    target.addEventListener("targetFound", () => {
+      video.play();
+    });
+
+    target.addEventListener("targetLost", () => {
+      video.pause();
+    });
+  </script>
 
 </body>
 </html>
