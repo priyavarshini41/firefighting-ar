@@ -4,71 +4,52 @@
   <meta charset="utf-8">
   <title>Firefighting WebAR</title>
 
-  <!-- A-Frame -->
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <meta name="viewport"
+        content="width=device-width,
+                 initial-scale=1.0,
+                 maximum-scale=1.0,
+                 user-scalable=no">
 
-  <!-- AR.js -->
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    a-scene {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+  <script>
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock("portrait").catch(() => {});
+    }
+  </script>
 </head>
 
-<body style="margin:0; overflow:hidden;">
+<body>
 
   <a-scene
     embedded
-    vr-mode-ui="enabled: false"
-    arjs="sourceType: webcam; debugUIEnabled: false;">
+    vr-mode-ui="enabled:false"
+    arjs="sourceType: webcam; debugUIEnabled:false;">
 
-    <!-- HIRO Marker -->
     <a-marker preset="hiro">
-
-      <!-- 🧯 Fire Extinguisher 3D Model -->
-      <a-gltf-model
-        src="extinguisher.gltf"
-        position="0 0 0"
-        scale="0.25 0.25 0.25"
-        rotation="0 180 0">
-      </a-gltf-model>
-
-      <!-- 🔴 Title -->
-      <a-text
-        value="FIRE SAFETY - FIRE EXTINGUISHER"
-        position="0 1.3 0"
-        align="center"
-        color="red"
-        scale="1.2 1.2 1.2">
-      </a-text>
-
-      <!-- 🧯 Type -->
-      <a-text
-        value="Type: ABC Extinguisher"
-        position="0 1.1 0"
-        align="center"
-        color="white">
-      </a-text>
-
-      <!-- ✅ PASS Method -->
-      <a-text
-        value="PASS METHOD\nP - Pull the Pin\nA - Aim at the Base\nS - Squeeze the Handle\nS - Sweep Side to Side"
-        position="0 0.7 0"
-        align="center"
-        color="yellow"
-        scale="0.8 0.8 0.8">
-      </a-text>
-
-      <!-- 🔥 Fire Animation (Visual Effect) -->
-      <a-cone
-        position="0.5 0.25 0"
-        radius-bottom="0.15"
-        height="0.4"
-        color="orange"
-        animation="property: scale; to: 1 1.4 1; dir: alternate; dur: 500; loop: true">
-      </a-cone>
-
+      <!-- your model + text here -->
     </a-marker>
 
-    <!-- Camera -->
     <a-entity camera></a-entity>
-
   </a-scene>
 
 </body>
